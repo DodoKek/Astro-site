@@ -1,3 +1,18 @@
+::-webkit-scrollbar {
+    width: 12px;
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+
 
 .background{
 	background:linear-gradient(120deg, #FFCB32, #FF4A3B);
@@ -46,7 +61,8 @@
 	height: 100vh;
 	z-index: 5;
 	top: 0;
-	overflow: scroll;
+	overflow-y: scroll;
+	overflow-x: hidden;
 	background:linear-gradient(180deg, #43D29D, #9FFFBF);
 }
 #exit_btn{

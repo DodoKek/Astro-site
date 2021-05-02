@@ -5,18 +5,18 @@ let tasks = [
 		[
 			"Телескоп #1",
 			`Найдите увеличение телескопа-рефлектора, зеркало которого имеет радиус кривизны first_param м, а фокусное расстояние окуляра равно second_param мм.`,
-			[2, "up", 8],
-			[20, "down", 8],
-			50,
+			[2, 8],
+			[20, 8],
+			"8532*first_param/second_param",
 			"Подсказка"
 
 		],
 		[
 			"Телескоп #2",
 			"Диаметр объектива телескопа first_param см. Каково теоретическое разрешение для визуальных наблюдений? Ответ дайте в секундах.",
-			[20, "down", 8],
-			[1, "down"],
-			0.5,
+			[20, 8],
+			[1, 8],
+			"8532*first_param/second_param",
 			"Подсказка"
 
 		]
@@ -25,9 +25,9 @@ let tasks = [
 		[
 			"Собственное движение звезд #1",
 			"Звезда, находясь на расстоянии first_param пк, имеет тангенциальную (перпендикулярную лучу зрения) скорость second_param км/с. За сколько лет она переместится по небу на угловой диаметр Луны (0,5 deg)?",
-			[10, "up", 8],
-			[20, "down", 8],
-			4226,
+			[10, 8],
+			[20, 8],
+			"8532*first_param/second_param",
 			"Подсказка"
 
 		]
@@ -36,9 +36,9 @@ let tasks = [
 		[
 			"Стефан-Больцман #1",
 			"Ахахахахахахахахахахаха first_param пк, имеет тангенциальную (перпендикулярную лучу зрения) скорость second_param км/с. За сколько лет она переместится по небу на угловой диаметр Луны (0,5 deg)?",
-			[10, "up", 8],
-			[20, "down", 8],
-			4226,
+			[10, 8],
+			[20, 8],
+			"8532*first_param/second_param",
 			"Подсказка"
 
 		]
@@ -70,22 +70,14 @@ function construct_wrong_ans() {
 	return wrong_ans;
 }
 
-function generate_ans(new_ans1, new_ans2, i, theme) {
-	let old_ans1 = tasks[theme][i][2];
-	let old_ans2 = tasks[theme][i][3];
-	let k1 = new_ans1 / old_ans1[0];
-	let k2 = new_ans2 / old_ans2[0];
-
-
-	if (old_ans1[1] == "down") {
-		k1 = (1 / k1)
-	}
-
-	if (old_ans2[1] == "down") {
-		k2 = (1 / k2)
-	}
-	let ans = round_to_dec(tasks[theme][i][4] * k1 * k2);
-
+function generate_ans(first_param, second_param, i, theme) {
+	let ans_body = tasks[theme][i][4];
+	
+	ans_body = ans_body.replace("first_param", first_param);
+	ans_body = ans_body.replace("second_param", second_param);
+	let ans  = eval(ans_body);
+	ans = round_to_dec(ans);
+	
 	return ans;
 }
 
@@ -132,9 +124,9 @@ function generate_borders(num) {
 	if (tmp[0] == 1) {
 		return 1;
 	}
-	if (tmp[2] != 1) {
+	if (tmp[1] != 1) {
 
-		let ans = randomInteger(Math.floor(tmp[0] - (tmp[0] / tmp[2])), Math.ceil(tmp[0] + (tmp[0] / tmp[2])))
+		let ans = randomInteger(Math.floor(tmp[0] - (tmp[0] / tmp[1])), Math.ceil(tmp[0] + (tmp[0] / tmp[1])))
 		if (ans == 0) {
 			ans += 1;
 		}
@@ -159,8 +151,8 @@ function generate_block(i, theme) {
 	let hint_button = document.createElement('button');
 	let skip = document.createElement('button');
 
-	let first_param = generate_borders(tasks[0][i][2])
-	let second_param = generate_borders(tasks[0][i][3])
+	let first_param = generate_borders(tasks[theme][i][2])
+	let second_param = generate_borders(tasks[theme][i][3])
 	let ans = generate_ans(first_param, second_param, i, theme)
 	let temp_task_body = tasks[theme][i][1];
 
