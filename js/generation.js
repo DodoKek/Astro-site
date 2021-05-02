@@ -241,6 +241,7 @@ var minus = this.document.getElementById('minus');
 var input_amount = document.getElementById("amount");
 var background = document.getElementById('background');
 
+
 start_generation.onclick = function () {
 	let count_themes = 0;
 	hidden.innerHTML = '';
@@ -346,3 +347,10 @@ hidden.addEventListener("click", function (event) {
 
 
 });
+
+$('#exit_btn').on('click', function(){
+	let side = $("#sidebar");
+	side.toggleClass("sidebar-small");
+});
+	
+
