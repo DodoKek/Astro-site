@@ -57,7 +57,7 @@
 .sidebar{
 	position: fixed;
 	background-color: #eee;
-	width: 40%;
+	width: 25%;
 	height: 100vh;
 	z-index: 5;
 	top: 0;
@@ -73,10 +73,14 @@
 .sidebar-small{
 	width: 10%;
 }
-#percentage{
+.percentage{
 	font-size: 40px;
 	color: green;
 	border: 3px solid green;
 	border-radius: 100px;
-	width: 30px;
+	width: 70px;
+	text-align: center;
+}
+.disable{
+	display: none;
 }

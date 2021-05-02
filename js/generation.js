@@ -1,5 +1,9 @@
 'use strict';
-
+var tasks_counter = [
+	[0, 0, 0],
+	[0, 0, 0],
+	[0, 0, 0]
+]
 let tasks = [
 	[
 		[
@@ -7,17 +11,17 @@ let tasks = [
 			`Найдите увеличение телескопа-рефлектора, зеркало которого имеет радиус кривизны first_param м, а фокусное расстояние окуляра равно second_param мм.`,
 			[2, 8],
 			[20, 8],
-			"8532*first_param/second_param",
-			"Подсказка"
+			"first_param*500/second_param",
+			"Фокусное расстояние сферического зеркала равно половине радиуса кривизны. Увеличение вычисляется по формуле W = F/f, где F - фокусное расстояние телескопа, f - фокусное расстояние окуляра."
 
 		],
 		[
 			"Телескоп #2",
-			"Диаметр объектива телескопа first_param см. Каково теоретическое разрешение для визуальных наблюдений? Ответ дайте в секундах.",
-			[20, 8],
-			[1, 8],
-			"8532*first_param/second_param",
-			"Подсказка"
+			"Фокусное расстояние телескопа first_param м. Какое увеличение получится при работе с окуляром, фокусное расстояние которого second_param мм.",
+			[3, 20],
+			[10, 20],
+			"first_param*1000/second_param",
+			"Увеличение вычисляется по формуле W = F/f, где F - фокусное расстояние телескопа, f - фокусное расстояние окуляра."
 
 		]
 	],
@@ -34,12 +38,12 @@ let tasks = [
 	],
 	[
 		[
-			"Стефан-Больцман #1",
-			"Ахахахахахахахахахахаха first_param пк, имеет тангенциальную (перпендикулярную лучу зрения) скорость second_param км/с. За сколько лет она переместится по небу на угловой диаметр Луны (0,5 deg)?",
-			[10, 8],
+			"Звездные величины #1",
+			"Телескопу доступны звезды first_param m. Во сколько раз они слабее звезд, едва различимых невооруженным глазом?",
+			[25, 10],
 			[20, 8],
-			"8532*first_param/second_param",
-			"Подсказка"
+			"Math.pow(10, (first_param-6)*0.4)",
+			"Звездная величина звезд, различимых глазом 6 m. Отношение светимостей равно L1/L2 = 10**(-0.4*(m1-m2))"
 
 		]
 	]
@@ -72,13 +76,14 @@ function construct_wrong_ans() {
 
 function generate_ans(first_param, second_param, i, theme) {
 	let ans_body = tasks[theme][i][4];
-	
+
 	ans_body = ans_body.replace("first_param", first_param);
 	ans_body = ans_body.replace("second_param", second_param);
-	let ans  = eval(ans_body);
+	let ans = eval(ans_body);
 	ans = round_to_dec(ans);
-	
+
 	return ans;
+
 }
 
 function round_to_dec(num) {
@@ -188,6 +193,7 @@ function generate_block(i, theme) {
 	block.classList.add("container", "mb-3", "round-border", "mt-3");
 	block.setAttribute("tasknumber", i);
 	block.setAttribute("ans", ans)
+	block.setAttribute("theme", theme)
 	//------------------------------
 	hint_button.innerHTML = "Я сдаюсь";
 	hint_button.setAttribute("surrender", "surrender")
@@ -282,12 +288,17 @@ minus.addEventListener("click", function () {
 
 hidden.addEventListener("click", function (event) {
 	var par = event.target.parentElement;
+	let theme_id  = par.getAttribute("theme");
 	if (event.target.getAttribute("submit") == "submit") {
 
 		let but = event.target.previousElementSibling;
-
-		if (but.value == par.getAttribute("ans")) {
-
+		let input_amount = round_to_dec(but.value);
+		let answer = par.getAttribute("ans")
+		
+		
+		if (input_amount == answer) {
+			tasks_counter[theme_id][0] += 1
+			tasks_counter[theme_id][1] += 1
 			for (let j = 0; j < par.childNodes.length; j++) {
 				if (par.childNodes[j].style.zIndex == "2") {
 					par.childNodes[j].style.display = "block";
@@ -300,6 +311,7 @@ hidden.addEventListener("click", function (event) {
 			}
 			$(par).fadeOut(1000);
 		} else {
+			tasks_counter[theme_id][2] += 1
 			var par = event.target.parentElement;
 			for (let j = 0; j < par.childNodes.length; j++) {
 				if (par.childNodes[j].style.zIndex == "2") {
@@ -315,7 +327,7 @@ hidden.addEventListener("click", function (event) {
 	}
 
 	if (event.target.getAttribute("surrender") == "surrender") {
-
+		tasks_counter[theme_id][1] += 1
 		for (let j = 0; j < par.childNodes.length; j++) {
 			if (par.childNodes[j].getAttribute("form") == "form") {
 				$(par.childNodes[j]).fadeOut();
@@ -336,13 +348,18 @@ hidden.addEventListener("click", function (event) {
 	if (event.target.getAttribute("skip") == "skip") {
 		$(par).fadeOut();
 	}
+	
+	let tmp_str = "#percentage-" + theme_id.toString();
+	console.log(tmp_str);
+	let percentage_num = $(tmp_str);
+	
+	$(percentage_num).html(round_to_dec(tasks_counter[theme_id][0]/tasks_counter[theme_id[1]]));
 
 
 });
 
-$('#exit_btn').on('click', function(){
+$('#exit_btn').on('click', function () {
 	let side = $("#sidebar");
+	$(".headers").toggleClass("disable");
 	side.toggleClass("sidebar-small");
 });
-	
-
