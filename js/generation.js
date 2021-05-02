@@ -43,7 +43,7 @@ let tasks = [
 			[25, 10],
 			[20, 8],
 			"Math.pow(10, (first_param-6)*0.4)",
-			"Звездная величина звезд, различимых глазом 6 m. Отношение светимостей равно L1/L2 = 10**(-0.4*(m1-m2))"
+			"Звездная величина звезд, различимых глазом 6 m. Отношение светимостей равно L1/L2 = 10^(-0.4*(m1-m2))"
 
 		]
 	]
@@ -258,7 +258,7 @@ start_generation.onclick = function () {
 		}
 	}
 
-	console.log(themes_array);
+
 
 	for (let i = 0; i < count_themes; i += 1) {
 		if (i == count_themes - 1) {
@@ -283,22 +283,27 @@ plus.addEventListener("click", function () {
 
 
 minus.addEventListener("click", function () {
-	input_amount.value = Number(input_amount.value) - Number(1);
+	if (input_amount.value - 1 < 0) {
+		input_amount.value = 0;
+	} else {
+		input_amount.value = Number(input_amount.value) - Number(1);
+	}
+
 });
 
 hidden.addEventListener("click", function (event) {
 	var par = event.target.parentElement;
-	let theme_id  = par.getAttribute("theme");
+	let theme_id = par.getAttribute("theme");
 	if (event.target.getAttribute("submit") == "submit") {
 
 		let but = event.target.previousElementSibling;
 		let input_amount = round_to_dec(but.value);
 		let answer = par.getAttribute("ans")
-		
-		
+
+
 		if (input_amount == answer) {
 			tasks_counter[theme_id][0] += 1
-			tasks_counter[theme_id][1] += 1
+
 			for (let j = 0; j < par.childNodes.length; j++) {
 				if (par.childNodes[j].style.zIndex == "2") {
 					par.childNodes[j].style.display = "block";
@@ -348,18 +353,29 @@ hidden.addEventListener("click", function (event) {
 	if (event.target.getAttribute("skip") == "skip") {
 		$(par).fadeOut();
 	}
-	
-	let tmp_str = "#percentage-" + theme_id.toString();
-	console.log(tmp_str);
-	let percentage_num = $(tmp_str);
-	
-	$(percentage_num).html(round_to_dec(tasks_counter[theme_id][0]/tasks_counter[theme_id[1]]));
 
+	//let tmp_str = "#percentage-" + theme_id.toString();
+	//console.log(tmp_str);
+	//let percentage_num = $(tmp_str);
+
+	//$(percentage_num).text(round_to_dec(tasks_counter[theme_id][0] / tasks_counter[theme_id][1]));
+	////$('.percentage').each(function (i) {
+	//	let num = $(this).attr('percentage');
+	//	let tmp_proc = (round_to_dec(tasks_counter[num][0] / tasks_counter[num][1])*100)
+	//	console.log(tmp_proc);
+	//	$(this).css("background", 'linear-gradient(to right, green' + tmp_proc.toString() + '%, red 0%)')
+	//});
+	$('.total-amount').each(function (i) {
+		let id = $(this).attr('theme-ind');
+
+		$(this).html("Всего сделано задач:" + (tasks_counter[id][0] + tasks_counter[id][1]) + ". Сданные задачи: " + tasks_counter[id][0] + ". Нерешенные задачи: " + tasks_counter[id][1] + ". Ошибки: " + tasks_counter[id][2] + ".");
+	});
 
 });
 
 $('#exit_btn').on('click', function () {
 	let side = $("#sidebar");
 	$(".headers").toggleClass("disable");
+	$(".total-amount").toggleClass("disable");
 	side.toggleClass("sidebar-small");
 });
