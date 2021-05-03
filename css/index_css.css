@@ -12,7 +12,11 @@
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
 
-
+@media screen and (max-width: 1650px){
+	.adaptive{
+		width:60%;
+	}
+}
 
 .background{
 	background:linear-gradient(120deg, #FFCB32, #FF4A3B);
@@ -20,7 +24,7 @@
 }
 #generate{
 	width: 80%;
-	font-size: 50px;
+	font-size: 200%;
 }
 #hidden{
 	display: none;
@@ -85,4 +89,25 @@
 }
 .disable{
 	display: none;
+}
+.pop_up{
+	position: absolute;
+	width: 80%;
+	height: 300px;
+	z-index: 100;
+	top: 100px;
+	left: 100px;
+	background: #eee;
+	border: black solid 3px;
+	border-radius: 20px;
+	text-align: center;
+}
+.pop_up_header{
+	display: inline-block;
+	font-size: 20px;
+}
+.pop_up_btn{
+	position: relative;
+	top:-20px;
+	left: 150px;
 }

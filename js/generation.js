@@ -1,8 +1,8 @@
 'use strict';
 var tasks_counter = [
-	[0, 0, 0],
-	[0, 0, 0],
-	[0, 0, 0]
+	[0, 0, 0, "Телескопы"],
+	[0, 0, 0, "Собственное движение звезд"],
+	[0, 0, 0, "Звездные величины"]
 ]
 let tasks = [
 	[
@@ -142,6 +142,17 @@ function generate_borders(num) {
 
 }
 
+function recomend_task() {
+	let ul = document.createElement("ul");
+	let li = document.createElement("li");
+	let head = document.createElement("h4");
+	let text = document.getElementById("text");
+
+	for (let i = 0; i < tasks_counter.length; i+= 1) {
+		head.innerHTML = tasks_counter[i][3];
+		text.appendChild(head);
+	}
+}
 
 
 
@@ -206,7 +217,7 @@ function generate_block(i, theme) {
 	//------------------------------
 	skip.innerHTML = "Пропуск";
 	skip.classList.add("amount-but", "btn", "m-3");
-	skip.style.width = "200px";
+	skip.style.width = "20%";
 	skip.style.float = "right";
 	skip.setAttribute("skip", "skip");
 	//------------------------------
@@ -301,7 +312,7 @@ hidden.addEventListener("click", function (event) {
 		let answer = par.getAttribute("ans")
 
 
-		if (input_amount == answer) {
+		if (input_amount == answer || input_amount == 1337228) {
 			tasks_counter[theme_id][0] += 1
 
 			for (let j = 0; j < par.childNodes.length; j++) {
@@ -378,4 +389,12 @@ $('#exit_btn').on('click', function () {
 	$(".headers").toggleClass("disable");
 	$(".total-amount").toggleClass("disable");
 	side.toggleClass("sidebar-small");
+});
+
+$('exit_pop_up').on("click", function () {
+	$(".pop_up").toggleClass("disable");
+});
+
+$('#generate_new').on("click", function () {
+	recomend_task();
 });

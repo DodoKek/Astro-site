@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>Заботай все.</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
@@ -14,17 +14,23 @@
 
 <body>
 
-
+	<div class="pop_up ">
+			<div class="pop_up_header mt-5">Отчет об эффективности решения задач.</div>
+			<div class="pop_up_title" id="text"></div>
+			
+			<button class="btn amount-but" id="exit_pop_up" style="width: 100px; ">Продолжить решать.</button>
+			<button class="btn amount-but" id="generate_new" style="width: 200px;">Сгенерировать адаптивный вариант.</button>
+		</div>
 	<div class="background">
-		
+
 		<div class="fillers">
 			<div class="container-fluid p-5"></div>
 			<div class="container-fluid p-5"></div>
 			<div class="container-fluid p-5"></div>
 			<div class="container-fluid p-5"></div>
 		</div>
-		
-		
+
+
 		<div class="sidebar sidebar-small" id="sidebar">
 			<div class="container-fluid">
 				<button class="btn amount-but" id="exit_btn"></button>
@@ -47,25 +53,25 @@
 				</div>
 			</div>
 		</div>
-		
-		
-		
-		<div class="container-fluid pt-3 pb-3 w-60" style="padding: 0;">
+
+
+
+		<div class="container-fluid pt-3 pb-3 w-60 adaptive" style="padding: 0;">
 			<div class="container m-auto">
 				<div class="row">
 					<div class="col-8">
 						<button type="button" id="generate" class="btn-success mb-3">Сгенерировать</button>
 						<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
 							<input type="checkbox" class="btn-check" id="btncheck1" autocomplete="on" theme_index="0" checked>
-							<label class="btn btn-outline-success" for="btncheck1" >Телескопы</label>
+							<label class="btn btn-outline-success" for="btncheck1">Телескопы</label>
 
 							<input type="checkbox" class="btn-check" id="btncheck2" autocomplete="on" theme_index="1" checked>
 							<label class="btn btn-outline-success" for="btncheck2">Собственное движение звезд</label>
 
 							<input type="checkbox" class="btn-check" id="btncheck3" autocomplete="on" theme_index="2" checked>
 							<label class="btn btn-outline-success" for="btncheck3">Звездные величины</label>
-							
-							
+
+
 						</div>
 					</div>
 					<div class="col-3">
@@ -79,15 +85,17 @@
 			<div class="contianer w-80" id="hidden">
 
 			</div>
-			
+
 			<div class="fillers">
-			<div class="container-fluid p-5"></div>
-			<div class="container-fluid p-5"></div>
-			<div class="container-fluid p-5"></div>
-			<div class="container-fluid p-5"></div>
-			<div class="container-fluid p-5"></div>
+				<div class="container-fluid p-5"></div>
+				<div class="container-fluid p-5"></div>
+				<div class="container-fluid p-5"></div>
+				<div class="container-fluid p-5"></div>
+				<div class="container-fluid p-5"></div>
+			</div>
 		</div>
-		</div>
+
+		
 
 
 
