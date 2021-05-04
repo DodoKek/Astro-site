@@ -18,6 +18,10 @@
 	}
 }
 
+li{
+	list-style: none;
+}
+
 .background{
 	background:linear-gradient(120deg, #FFCB32, #FF4A3B);
 	
@@ -93,7 +97,6 @@
 .pop_up{
 	position: absolute;
 	width: 80%;
-	height: 300px;
 	z-index: 100;
 	top: 100px;
 	left: 100px;

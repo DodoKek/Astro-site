@@ -1,6 +1,6 @@
 'use strict';
 var tasks_counter = [
-	[0, 0, 0, "Телескопы"],
+	[7, 100, 0, "Телескопы"],
 	[0, 0, 0, "Собственное движение звезд"],
 	[0, 0, 0, "Звездные величины"]
 ]
@@ -143,15 +143,46 @@ function generate_borders(num) {
 }
 
 function recomend_task() {
-	let ul = document.createElement("ul");
-	let li = document.createElement("li");
-	let head = document.createElement("h4");
-	let text = document.getElementById("text");
 
-	for (let i = 0; i < tasks_counter.length; i+= 1) {
+
+	let text = document.getElementById("text");
+	text.innerHTML = '';
+
+	for (let i = 0; i < tasks_counter.length; i += 1) {
+		let task = tasks_counter[i];
+		let head = document.createElement("h4");
 		head.innerHTML = tasks_counter[i][3];
 		text.appendChild(head);
+		if (task[0] + task[1] > 2) {
+			let ul = document.createElement("ul");
+			let li = document.createElement("li");
+			console.log(task[0] / (task[0] + task[1]));
+			if (task[0] / (task[0] + task[1]) >= 0.75) {
+				li.innerHTML = "Вы преуспеваете в этой теме, требется небольшая доработка.";
+			} else {
+				if ((task[0] / (task[0] + task[1])) >= 0.5 && (task[1] / (task[0] + task[1])) < 0.75) {
+					li.innerHTML = "Присутствуют ошибки, обратите внимание на этот раздел.";
+				} else {
+					if (task[0] / (task[0] + task[1]) < 0.5) {
+						li.innerHTML = "Эта тема изучена недостаточно хорошо, прорешайте побольше задач.";
+					}
+				}
+			}
+			ul.appendChild(li);
+
+			if (task[2] > task[0] + 2) {
+				li.innerHTML = "Потренируйтесь в расчетах, ответы не всегда верны."
+			}
+			ul.appendChild(li);
+
+			text.appendChild(ul);
+		} else {
+			let p = document.createElement("p");
+			p.innerHTML = "Недостаточно данных";
+			text.appendChild(p);
+		}
 	}
+
 }
 
 
@@ -388,13 +419,19 @@ $('#exit_btn').on('click', function () {
 	let side = $("#sidebar");
 	$(".headers").toggleClass("disable");
 	$(".total-amount").toggleClass("disable");
+	$('#show_stats').toggleClass("disable");
 	side.toggleClass("sidebar-small");
 });
 
-$('exit_pop_up').on("click", function () {
-	$(".pop_up").toggleClass("disable");
+$('#exit_pop_up').on("click", function () {
+	$(".pop_up").fadeOut(300);
 });
 
 $('#generate_new').on("click", function () {
+
+});
+
+$('#show_stats').on('click', function () {
+	$(".pop_up").fadeIn(300);
 	recomend_task();
 });
