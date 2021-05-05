@@ -59,7 +59,7 @@ li{
 	transition: 0.5s ease-in;
 }
 .btn-success:hover{
-	transition:0.5s;
+	transition:0.1s;
 }
 
 .sidebar{
@@ -72,15 +72,21 @@ li{
 	overflow-y: scroll;
 	overflow-x: hidden;
 	background:linear-gradient(180deg, #43D29D, #9FFFBF);
+	transition: 0.1s;
 }
 #exit_btn{
 	width: 100px;
-	height: 20px;
+	font-size: 15px;
 	background-color: #FFCB32;
 }
 .sidebar-small{
 	width: 10%;
+	transition: 0.1s;
 }
+.sidebar_small:hover{
+	transition: 0.1s;
+}
+
 .percentage{
 	font-size: 35px;
 	color: green;

@@ -1,9 +1,10 @@
 'use strict';
 var tasks_counter = [
 	[7, 100, 0, "Телескопы"],
-	[0, 0, 0, "Собственное движение звезд"],
-	[0, 0, 0, "Звездные величины"]
+	[100, 5, 50, "Собственное движение звезд"],
+	[48, 18, 1000, "Звездные величины"]
 ]
+var recomendations = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 let tasks = [
 	[
 		[
@@ -145,6 +146,8 @@ function generate_borders(num) {
 function recomend_task() {
 
 
+	recomendations = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+
 	let text = document.getElementById("text");
 	text.innerHTML = '';
 
@@ -156,24 +159,34 @@ function recomend_task() {
 		if (task[0] + task[1] > 2) {
 			let ul = document.createElement("ul");
 			let li = document.createElement("li");
-			console.log(task[0] / (task[0] + task[1]));
+			//console.log(task[0] / (task[0] + task[1]));
+
 			if (task[0] / (task[0] + task[1]) >= 0.75) {
-				li.innerHTML = "Вы преуспеваете в этой теме, требется небольшая доработка.";
+				if ((task[0] / (task[0] + task[1]) > 0.9) && ((task[0] + task[1]) > 8)) {
+					li.innerHTML = "Тема изучена хорошо, сосредоточтесь на других задачах.";
+					recomendations[i] += 1;
+				} else {
+					li.innerHTML = "Вы преуспеваете в этой теме, требется небольшая доработка.";
+					recomendations[i] += 2;
+				}
 			} else {
 				if ((task[0] / (task[0] + task[1])) >= 0.5 && (task[1] / (task[0] + task[1])) < 0.75) {
 					li.innerHTML = "Присутствуют ошибки, обратите внимание на этот раздел.";
+					recomendations[i] += 3;
 				} else {
 					if (task[0] / (task[0] + task[1]) < 0.5) {
-						li.innerHTML = "Эта тема изучена недостаточно хорошо, прорешайте побольше задач.";
+						li.innerHTML = "Эта тема изучена плохо, прорешайте побольше задач.";
+						recomendations[i] += 4;
 					}
 				}
 			}
-			ul.appendChild(li);
 
-			if (task[2] > task[0] + 2) {
-				li.innerHTML = "Потренируйтесь в расчетах, ответы не всегда верны."
-			}
 			ul.appendChild(li);
+			let add_li = document.createElement("li");
+			if (task[2] > task[0] + 2) {
+				add_li.innerHTML = "Потренируйтесь в расчетах, ответы не всегда верны."
+			}
+			ul.appendChild(add_li);
 
 			text.appendChild(ul);
 		} else {
@@ -185,7 +198,23 @@ function recomend_task() {
 
 }
 
+function generate_adaptive() {
+	let hid = document.getElementById("hidden")
+	hid.innerHTML = '';
+	console.log(hid.innerHTML);
 
+	for (let i = 0; i < recomendations.length; i += 1) {
+		load_tasks(recomendations[i], i);
+	}
+	$(".pop_up").fadeOut(300);
+}
+
+function update_stats() {
+	$('.total-amount').each(function (i) {
+		let id = $(this).attr('theme-ind');
+		$(this).html("Всего сделано задач:" + (tasks_counter[id][0] + tasks_counter[id][1]) + ". Сданные задачи: " + tasks_counter[id][0] + ". Нерешенные задачи: " + tasks_counter[id][1] + ". Ошибки: " + tasks_counter[id][2] + ".");
+	});
+}
 
 function generate_block(i, theme) {
 	let block = document.createElement('div');
@@ -286,7 +315,7 @@ start_generation.onclick = function () {
 	let count_themes = 0;
 	hidden.innerHTML = '';
 	hidden.style.display = 'block';
-
+	update_stats();
 
 	let themes_array = []
 	for (let i = 1; i < 4; i++) {
@@ -315,8 +344,7 @@ start_generation.onclick = function () {
 
 
 
-	document.body.classList.toggle('background');
-	document.body.classList.toggle('background');
+
 }
 
 plus.addEventListener("click", function () {
@@ -407,12 +435,8 @@ hidden.addEventListener("click", function (event) {
 	//	console.log(tmp_proc);
 	//	$(this).css("background", 'linear-gradient(to right, green' + tmp_proc.toString() + '%, red 0%)')
 	//});
-	$('.total-amount').each(function (i) {
-		let id = $(this).attr('theme-ind');
 
-		$(this).html("Всего сделано задач:" + (tasks_counter[id][0] + tasks_counter[id][1]) + ". Сданные задачи: " + tasks_counter[id][0] + ". Нерешенные задачи: " + tasks_counter[id][1] + ". Ошибки: " + tasks_counter[id][2] + ".");
-	});
-
+	update_stats();
 });
 
 $('#exit_btn').on('click', function () {
@@ -427,8 +451,10 @@ $('#exit_pop_up').on("click", function () {
 	$(".pop_up").fadeOut(300);
 });
 
-$('#generate_new').on("click", function () {
 
+
+$('#generate_new').on("click", function () {
+	generate_adaptive();
 });
 
 $('#show_stats').on('click', function () {
