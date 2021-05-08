@@ -5,22 +5,23 @@
 	<meta charset="UTF-8">
 	<title>Заботай все.</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+	<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="css/index_css.css">
 	<script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
-
+	
 </head>
 
 <body>
 
 	<div class="pop_up disable p-5 pt-2">
-			<div class="pop_up_header mt-5">Отчет об эффективности решения задач.</div>
-			<div class="pop_up_title" id="text"></div>
-			
-			<button class="btn amount-but" id="exit_pop_up" style="width: 200px; ">Продолжить решать.</button>
-			<button class="btn amount-but" id="generate_new" style="width: 300px;">Сгенерировать адаптивный вариант.</button>
-		</div>
+		<div class="pop_up_header mt-5">Отчет об эффективности решения задач.</div>
+		<div class="pop_up_title" id="text"></div>
+
+		<button class="btn amount-but" id="exit_pop_up" style="width: 200px; ">Продолжить решать.</button>
+		<button class="btn amount-but" id="generate_new" style="width: 300px;">Сгенерировать адаптивный вариант.</button>
+	</div>
 	<div class="background">
 
 		<div class="fillers">
@@ -37,19 +38,19 @@
 			</div>
 			<div class="container-fluid m-5" style="font-size: 20px; width: 80%;">
 				<div class="row">
-					<div class="col-3 mt-3 headers disable">Телескопы</div>
+					<div class="col-3 mt-3 headers disable">Физика звезд</div>
 					<!--<div class="col-9"><div class="percentage" percentage="0"></div></div>-->
-					<div class="total-amount disable" theme-ind="0">Всего сделано задач: 0. Сданные задачи: 0. Нерешенные задачи: 0. Ошибки: 0. </div>
+					<div class="total-amount disable" theme-ind="0">Всего сдано задач: 0. Решенные задачи: 0. Нерешенные задачи: 0. Ошибки: 0. </div>
 				</div>
 				<div class="row">
-					<div class="col-3 mt-3 headers disable">Собственное движение звезд</div>
+					<div class="col-3 mt-3 headers disable">Законы кеплера и другие</div>
 					<!--<div class="col-9"><div class="percentage" percentage="1"></div></div>-->
-					<div class="total-amount disable" theme-ind="1">Всего сделано задач: 0. Сданные задачи: 0. Нерешенные задачи: 0. Ошибки: 0. </div>
+					<div class="total-amount disable" theme-ind="1">Всего сдано задач: 0. Решенные задачи: 0. Нерешенные задачи: 0. Ошибки: 0. </div>
 				</div>
 				<div class="row">
 					<div class="col-3 mt-3 headers disable">Звездные величины</div>
 					<!--<div class="col-9"><div class="percentage" percentage="2"></div></div>-->
-					<div class="total-amount disable" theme-ind="2">Всего сделано задач: 0. Сданные задачи: 0. Нерешенные задачи: 0. Ошибки: 0. </div>
+					<div class="total-amount disable" theme-ind="2">Всего сдано задач: 0. Решенные задачи: 0. Нерешенные задачи: 0. Ошибки: 0. </div>
 				</div>
 				<button id="show_stats" class="btn amount-but disable mt-5" style="width: 150px;">Статистика</button>
 			</div>
@@ -63,13 +64,13 @@
 					<div class="col-8">
 						<button type="button" id="generate" class="btn-success mb-3">Сгенерировать</button>
 						<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-							<input type="checkbox" class="btn-check" id="btncheck1" autocomplete="on" theme_index="0" checked>
+							<input type="checkbox" class="btn-check" id="btncheck1" autocomplete="on" theme_index="0">
 							<label class="btn btn-outline-success" for="btncheck1">Телескопы</label>
 
-							<input type="checkbox" class="btn-check" id="btncheck2" autocomplete="on" theme_index="1" checked>
-							<label class="btn btn-outline-success" for="btncheck2">Собственное движение звезд</label>
+							<input type="checkbox" class="btn-check" id="btncheck2" autocomplete="on" theme_index="1">
+							<label class="btn btn-outline-success" for="btncheck2">Законы Кеплера+</label>
 
-							<input type="checkbox" class="btn-check" id="btncheck3" autocomplete="on" theme_index="2" checked>
+							<input type="checkbox" class="btn-check" id="btncheck3" autocomplete="on" theme_index="2">
 							<label class="btn btn-outline-success" for="btncheck3">Звездные величины</label>
 
 
@@ -79,6 +80,7 @@
 						<input type="text" value="1" class="amount mt-4 mb-3" id="amount"><br>
 						<button class="btn amount-but" id="minus">-</button>
 						<button class="btn amount-but" id="plus">+</button>
+						<button class="btn amount-but" id="all_tasks">All</button>
 
 					</div>
 				</div>
@@ -96,7 +98,7 @@
 			</div>
 		</div>
 
-		
+
 
 
 
@@ -118,5 +120,4 @@
 		</div>
 	</div>
 </body>
-------------------------------------------------- -->
-</html>
+------------------------------------------------- --></html>

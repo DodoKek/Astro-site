@@ -28,14 +28,90 @@ let tasks = [
 	],
 	[
 		[
-			"Собственное движение звезд #1",
-			"Звезда, находясь на расстоянии first_param пк, имеет тангенциальную (перпендикулярную лучу зрения) скорость second_param км/с. За сколько лет она переместится по небу на угловой диаметр Луны (0,5 deg)?",
-			[10, 8],
+			"Законы Кеплера #1",
+			"Звездный период обращения планеты вокруг Солнца составляет около first_param лет. Найдите её полуось?",
+			[12, 8],
 			[20, 8],
-			"8532*first_param/second_param",
-			"Подсказка"
+			"Math.pow(first_param*first_param, 1/3)",
+			"Воспользуйтесь 3 законом Кеплера."
 
-		]
+		],
+		[
+			"Законы Кеплера #2",
+			"Планета совершает полный оборот вокруг Солнца за first_param земных года. Во сколько раз (в среднем) он дальше от Солнца, чем Земля?",
+			[80, 15],
+			[20, 8],
+			"Math.pow(first_param*first_param, 1/3)",
+			"Воспользуйтесь 3 законом Кеплера."
+
+		],
+		[
+			"Законы Кеплера #3",
+			"Расстояние от астероида Веста до Солнца изменяется в пределах от first_param до second_param а.е. Найдите период обращения астероида.",
+			[2, 8],
+			[2.6, 8],
+			"Math.sqrt(Math.pow((first_param+second_param)/2, 3))",
+			"Можно найти полуось, зная перигельное и афелийное расстояния, далее применяем 3 закон Кеплера."
+
+		],
+		
+		[
+			"Законы Кеплера #4",
+			"Кратчайшее расстояние между Землей и астероидом равно first_param а.е. Каков период обращения астероида вокруг Солнца? Орбиты считать окружностями, лежащими в одной плоскости.",
+			[0.28, 8],
+			[2.6, 8],
+			"Math.sqrt(Math.pow(1-first_param, 3))",
+			"Можно найти полуось астероида, так как тела находятся в нижнем соединении. Далее применяем 3 закон Кеплера."
+
+		],
+		[
+			"Законы Кеплера #5",
+			"Астероид Икар проходит перигелий своей орбиты каждые first_param суток, приближаясь к Солнцу на расстояние second_param а.е. Как далеко может удаляться от Солнца Икар?",
+			[420, 3],
+			[0.187, 8],
+			"2*Math.pow(first_param*first_param / (365*365), 1/3) - second_param",
+			"Можно найти полуось астероида. Зная, что q + Q = 2a находим афелий."
+
+		],
+		[
+			"Двойные звезды #6",
+			"Планета обращается вокруг звезды массы first_param M⊙ с периодом second_param лет. Определите полуось орбиты планеты.",
+			[1, 8],
+			[0.5, 8],
+			"Math.pow(first_param*first_param*second_param, 1/3)",
+			"Воспользуйтесь обобщенным 3 законом Кеплера."
+
+		],
+		
+		[
+			"Двойные звезды #7",
+			'Дана двойная звезда, обе компоненты которой находятся на главной последовательности. Параллакс second_param" . Найдите расстояние до системы.',
+			[15, 8],
+			[0.4, 2],
+			"1/second_param",
+			"Вспомните взаимосвязь между параллаксом и расстоянием."
+
+		],
+		
+		[
+			"Двойные звезды #8",
+			'Дана двойная звезда, обе компоненты которой находятся на главной последовательности. Период системы first_param лет. Расстояние до системы 4.5 пк. Угловой размер системы second_param". Определите сумму масс компонентов системы.',
+			[15, 8],
+			[2.3, 2],
+			"Math.pow(second_param * 4.5, 3)/ Math.pow(first_param, 2)",
+			"Мы можем найти полуось, заная угловой размер и расстояние до системы, далее применяем 3 обобщенный закон Кеплера."
+
+		],
+		
+		[
+			"Двойные звезды #9",
+			'Отношение масс компонент двойной звезды first_param M⊙, а суммарная масса second_param M⊙ Найдите светимость более легкой. Звезды лежат на главной последовательности.',
+			[2.3, 8],
+			[3.8, 2],
+			"Math.pow(second_param/(1+first_param) , 4)",
+			"Так как звезды лежат на главной последовательности, мы можем воспользоваться отношением масс, чтобы найти отоншение светимостей. Для нахождения массы нужно решить систему из двух уравнений, вы справитесь."
+
+		],
 	],
 	[
 		[
@@ -46,7 +122,98 @@ let tasks = [
 			"Math.pow(10, (first_param-6)*0.4)",
 			"Звездная величина звезд, различимых глазом 6 m. Отношение светимостей равно L1/L2 = 10^(-0.4*(m1-m2))"
 
-		]
+		],
+		[
+			"Звездные величины #2",
+			"Вычислите расстояние до звезды в парсеках, если ее видимая звёздная величина first_paramm, а абсолютная звездная величина second_paramm",
+			[0.5, 4],
+			[1, 10],
+			"Math.pow(10, (second_param-5-first_param)/-5)",
+			"M = m + 5 - 5lg(r)"
+		],
+
+		[
+			"Звездные величины #3",
+			"Переменная в максимуме имеет визуальный блеск first_paramm, в минимуме second_paramm. Во сколько примерно раз меняется ее светимость в видимом диапазоне?",
+			[2.5, 5],
+			[9.2, 5],
+			"Math.pow(100, (second_param-first_param)/ 5)",
+			"Разности звездных величин в максимуме и в минимуме блеска соответствует отношение освещенностей, а потому и светимостей в видимом диапазоне. L max / L min = 100^(ΔM/5)"
+
+		],
+		[
+			"Звездные величины #4",
+			"Разность звездных величин двух звезд одинаковой светимости равна first_paramm. Во сколько раз одна из них дальше другой?",
+			[2.5, 5],
+			[9.2, 5],
+			"Math.sqrt(Math.pow(10, first_param*0.4))",
+			"Разности в 2.5 звездной величины соответствует отношение освещенностей, равное L = 10^(0.4*M). Освещенность обратно пропорциональна квадрату расстояния до светила. Так как светимости звезд по условию одинаковы, то одна из них находится в L^(1/2) раз дальше другой."
+
+		],
+		[
+			"Звездные величины #5",
+			"Двойная звезда имеет компоненты first_paramm и second_paramm. Найти суммарную звездную величину двойной звезды.",
+			[2, 1.5],
+			[3, 1.5],
+			"second_param-2.5*Math.log10(1+Math.pow(10, -0.4*(first_param-second_param)))",
+			"В этой задаче главное помнить, что звездные величины имеют не линейную, а логарифмическую шкалу. m - m2 = -2.5lg(L1+L2 / L2). Отношение светимостей можно найти из данных задачи. "
+
+		],
+		[
+			"Звездные величины #6",
+			"В звездном скоплении first_param звезд звездной величины second_paramm каждая. Найти суммарную звездную величину скопления.",
+			[10, 5],
+			[2, 4],
+			"second_param-2.5*Math.log10(first_param)",
+			"Аналогично задаче Звездные величины #5 найдем отношение освещенностей, которое будет равно количеству звезд. Далее по аналогичной формуле найдем звездную величину скопления."
+
+		],
+		[
+			"Звездные величины #7",
+			"На каком примерно расстоянии надо поместить first_param-ваттную лампочку, чтобы она выглядела как звезда 0-й звездной величины? Кпд лампочки принять за 3%. Ответ дайте в километрах.",
+			[100, 5],
+			[2, 4],
+			"Math.sqrt(( (0.3*first_param*10000000) / (4*Math.pow(10, -12))) / (4*Math.PI * Math.pow(10, 6))) / Math.pow(10, 5)",
+			"Для начала вычислим фотонную светимость лампочки, для этого поделим энергию, излучаемую лампочкой, на энергию фотона. Зная, что фотонная светимость звезды нулевой величины равна 10^6 фотонов/см^2*с , найдем расстояние :)"
+
+		],
+		[
+			"Звездные величины #8",
+			"Предположим, что звездная величина планеты солнечной системы в противостоянии на first_paramm меньше, чем в соединении. Найдите её полуось. Наблюдатель на земле.",
+			[4, 5],
+			[2, 4],
+			"(1+Math.sqrt(Math.pow(10, 0.4*first_param)))/(Math.sqrt(Math.pow(10, 0.4*first_param))-1)",
+			"Найдем отношение расстояний как корень из отношения светимостей, далее по формуле a+1 = R2/R1 * (a-1)"
+
+		],
+		[
+			"Звездные величины #9",
+			"Предположим, что звездная величина планеты солнечной системы в противостоянии на first_paramm меньше, чем в соединении. Найдите её полуось. Наблюдатель на земле.",
+			[4, 5],
+			[2, 4],
+			"(1+Math.sqrt(Math.pow(10, 0.4*first_param)))/(Math.sqrt(Math.pow(10, 0.4*first_param))-1)",
+			"Найдем отношение расстояний как корень из отношения светимостей, далее по формуле a+1 = R2/R1 * (a-1)"
+
+		],
+		[
+			"Звездные величины #10",
+			"Во сколько раз звезда first_param звездной величины выглядит слабее, чем Сириус, имеющий видимую звездную величину — 1.6m?",
+			[3.4, 5],
+			[2, 4],
+			"Math.pow(10, 0.4*(first_param+1.6))",
+			"L1/L2 = 10^-0.4*ΔM"
+
+		],
+		[
+			"Звездные величины #11",
+			"Параллакс некоторой звезды равен first_param, а ее видимая звездная величина second_paramm . Какова ее абсолютная звездная величина?",
+			[0.3, 5],
+			[10, 4],
+			"5+second_param+5*Math.log10(first_param)",
+			"M = m + 5 + 5lg(p)"
+
+		],
+
 	]
 ];
 
@@ -81,7 +248,7 @@ function generate_ans(first_param, second_param, i, theme) {
 	ans_body = ans_body.replace("first_param", first_param);
 	ans_body = ans_body.replace("second_param", second_param);
 	let ans = eval(ans_body);
-	ans = round_to_dec(ans);
+	ans = round_to_hun(ans);
 
 	return ans;
 
@@ -89,8 +256,15 @@ function generate_ans(first_param, second_param, i, theme) {
 
 function round_to_dec(num) {
 	num = num * 10;
-	num = Math.floor(num)
-	num = num / 10
+	num = Math.floor(num);
+	num = num / 10;
+	return num
+}
+
+function round_to_hun(num) {
+	num = num * 100;
+	num = Math.floor(num);
+	num = num / 100;
 	return num
 }
 
@@ -125,6 +299,10 @@ function randomInteger(min, max) {
 	return Math.round(rand);
 }
 
+function getRandomArbitary(min, max) {
+	return Math.random() * (max - min) + min;
+}
+
 function generate_borders(num) {
 	let tmp = num;
 	if (tmp[0] == 1) {
@@ -132,7 +310,8 @@ function generate_borders(num) {
 	}
 	if (tmp[1] != 1) {
 
-		let ans = randomInteger(Math.floor(tmp[0] - (tmp[0] / tmp[1])), Math.ceil(tmp[0] + (tmp[0] / tmp[1])))
+		let ans = round_to_dec(getRandomArbitary(tmp[0] - (tmp[0] / tmp[1]), tmp[0] + (tmp[0] / tmp[1])));
+
 		if (ans == 0) {
 			ans += 1;
 		}
@@ -212,7 +391,7 @@ function generate_adaptive() {
 function update_stats() {
 	$('.total-amount').each(function (i) {
 		let id = $(this).attr('theme-ind');
-		$(this).html("Всего сделано задач:" + (tasks_counter[id][0] + tasks_counter[id][1]) + ". Сданные задачи: " + tasks_counter[id][0] + ". Нерешенные задачи: " + tasks_counter[id][1] + ". Ошибки: " + tasks_counter[id][2] + ".");
+		$(this).html("Всего сдано задач:" + (tasks_counter[id][0] + tasks_counter[id][1]) + ". Сделанные задачи: " + tasks_counter[id][0] + ". Нерешенные задачи: " + tasks_counter[id][1] + ". Ошибки: " + tasks_counter[id][2] + ".");
 	});
 }
 
@@ -271,7 +450,7 @@ function generate_block(i, theme) {
 	hint_button.classList.add("btn", "amount-but", "m-3")
 	hint_button.style.width = "100px";
 
-	hint.innerHTML = tasks[0][i][5];
+	hint.innerHTML = tasks[theme][i][5] + "<b>  Правильный ответ: </b>" + ans;
 	hint.style.display = "none";
 	hint.setAttribute("hint", "hint")
 	//------------------------------
@@ -299,6 +478,12 @@ function load_tasks(amount, theme) {
 	for (let k = 0; k < amount; k++) {
 		let random_num = randomInteger(0, tasks[theme].length - 1)
 		generate_block(random_num, theme);
+	}
+}
+
+function load_all_tasks(theme) {
+	for (let k = 0; k < tasks[theme].length; k += 1) {
+		generate_block(k, theme)
 	}
 }
 
@@ -347,6 +532,29 @@ start_generation.onclick = function () {
 
 }
 
+
+$("#all_tasks").on("click", function () {
+	let count_themes = 0;
+	hidden.innerHTML = '';
+	hidden.style.display = 'block';
+	update_stats();
+
+	let themes_array = []
+	for (let i = 1; i < 4; i++) {
+		let tmp_checkbox = "btncheck" + i.toString();
+
+		tmp_checkbox = document.getElementById(tmp_checkbox)
+
+		if (tmp_checkbox.checked == true) {
+			count_themes += 1;
+			themes_array.push(tmp_checkbox.getAttribute("theme_index"));
+		}
+	}
+	for (let i = 0; i < count_themes; i += 1) {
+		load_all_tasks(themes_array[i]);
+	}
+});
+
 plus.addEventListener("click", function () {
 	input_amount.value = Number(input_amount.value) + Number(1);
 });
@@ -367,11 +575,11 @@ hidden.addEventListener("click", function (event) {
 	if (event.target.getAttribute("submit") == "submit") {
 
 		let but = event.target.previousElementSibling;
-		let input_amount = round_to_dec(but.value);
+		let input_amount = round_to_hun(but.value);
 		let answer = par.getAttribute("ans")
 
 
-		if (input_amount == answer || input_amount == 1337228) {
+		if (input_amount == answer || input_amount == 123) {
 			tasks_counter[theme_id][0] += 1
 
 			for (let j = 0; j < par.childNodes.length; j++) {
