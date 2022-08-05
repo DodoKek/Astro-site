@@ -1,3 +1,2 @@
-# For-JSON
-Rep FOr JSON
+# Astro-site
 Сайт для решения задач по астрономии для младшеклассников, он доступен по ссылке http://e90915at.beget.tech/index.html
